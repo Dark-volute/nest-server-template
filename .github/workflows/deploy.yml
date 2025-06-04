@@ -2,9 +2,9 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ deploy ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ deploy ]
 
 env:
   DOCKER_IMAGE: 438522434/nest-api
@@ -36,7 +36,7 @@ jobs:
   build-and-push:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/deploy'
     
     steps:
     - name: Checkout code
@@ -76,7 +76,7 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/deploy'
     
     steps:
     - name: Deploy to server
