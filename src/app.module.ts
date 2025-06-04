@@ -22,16 +22,16 @@ import { QueueModule } from '@/common/queue/queue.module';
         abortEarly: false,
       },
     }),
-    RedisModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        const REDIS_PORT = configService.get('REDIS_PORT');
-        return {
-          type: 'single',
-          url: `redis://localhost:${REDIS_PORT}`,
-        }
-      },
-    }),
+    // RedisModule.forRootAsync({
+    //   inject: [ConfigService],
+    //   useFactory: (configService: ConfigService) => {
+    //     const REDIS_PORT = configService.get('REDIS_PORT');
+    //     return {
+    //       type: 'single',
+    //       url: `redis://localhost:${REDIS_PORT}`,
+    //     }
+    //   },
+    // }),
 
     // TypeOrmModule.forRootAsync({
     //   inject: [ConfigService],
@@ -50,10 +50,10 @@ import { QueueModule } from '@/common/queue/queue.module';
     // }),
     // TypeOrmModule.forFeature([User]),
     LoggerModule,
-    PrismaModule,
-    AuthModule,
-    UserModule,
-    QueueModule,
+    //PrismaModule,
+    //AuthModule,
+    //UserModule,
+    // QueueModule,
   ],
   controllers: [AppController],
   providers: [AppService],
