@@ -34,6 +34,9 @@ RUN yarn install --frozen-lockfile --production && \
 # 从构建阶段复制编译后的代码
 COPY --from=builder /app/dist ./dist
 
+# 复制环境变量文件（重要！）
+COPY .env.production ./
+
 # 创建日志目录并设置权限
 RUN mkdir -p logs && \
     chown -R nestjs:nodejs /app
@@ -53,4 +56,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD node -e "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })" || exit 1
 
 # 启动应用
-CMD ["node", "dist/main.js"] 
+CMD ["npm", "run", "start:prod"]
