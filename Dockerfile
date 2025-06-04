@@ -36,6 +36,7 @@ COPY --from=builder /app/dist ./dist
 
 # 复制环境变量文件（重要！）
 COPY .env.production ./
+COPY docker-compose.simple.yml ./
 
 # 创建日志目录并设置权限
 RUN mkdir -p logs && \
